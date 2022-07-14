@@ -44,9 +44,10 @@ const App = () => {
   return (
     <>
       <h3>Todoタスク管理</h3>
+      <div>Remaining tasks : {todos.filter((todo) => !todo.completed).length}</div> {/* completedがTrueの時だけカウント */}
       <input type="text" name="" id="" ref={todoNameRef} />
       <button onClick={handleAddTodo}>Add</button>
-      <button onClick={handleClear}>Del</button>
+      <button onClick={handleClear}>Del</button><br/>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
     </>
   );
