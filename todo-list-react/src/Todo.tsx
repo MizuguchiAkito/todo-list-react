@@ -1,6 +1,12 @@
-import React from 'react'
+import { FC } from 'react'
+import { ITodoItem } from './models/todo';
 
-const Todo = ({todo, toggleTodo}) => {
+interface ITodo {
+    todo: ITodoItem;
+    toggleTodo: (id: string) => void;
+}
+
+const Todo: FC<ITodo> = ({todo, toggleTodo}) => {
 
     const handleTodoClick = () =>{
         toggleTodo(todo.id);
