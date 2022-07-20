@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 // uuid...ランダムなid自動生成
 
 import { useState, useRef } from "react";
-import { ITodoItem } from "./models/todo";
+import { ITodoItem } from "../../models/todo";
 
 const App = () => {
 
