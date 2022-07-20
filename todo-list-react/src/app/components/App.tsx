@@ -1,10 +1,18 @@
 import "./App.css";
 import TodoList from "./TodoList";
+import Header from './Header';
 import { v4 as uuidv4 } from "uuid";
 // uuid...ランダムなid自動生成
 
 import { useState, useRef } from "react";
 import { ITodoItem } from "../../models/todo";
+
+//material ui
+import { Grid } from '@material-ui/core';
+// import Button from '@mui/material/Button';
+// import DeleteIcon from '@mui/icons-material/Delete';
+// import SendIcon from '@mui/icons-material/Send';
+// import Stack from '@mui/material/Stack';
 
 const App = () => {
 
@@ -66,7 +74,16 @@ const App = () => {
   }
 
   return (
+    // <Grid container direction="column">
+    // <Grid item>
+    //   <Header />
+    // </Grid>
     <>
+      <Grid container direction="column">
+      <Grid item>
+        <Header />
+      </Grid>
+      </Grid>
       <h3>Todoタスク管理</h3>
       <div>Remaining tasks : {todos.filter((todo) => !todo.completed).length}</div> {/* completedがTrueの時だけカウント */}
       <input type="text" name="" id="" ref={todoNameRef} />
