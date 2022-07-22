@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { ITodoItem } from './models/todo';
+import { ITodoItem } from '../../models/todo';
 
 interface ITodo {
     todo: ITodoItem;

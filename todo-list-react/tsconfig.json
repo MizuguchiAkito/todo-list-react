@@ -21,8 +21,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "incremental": true
+    "incremental": true,
+    "allowJs":true,
   },
   "exclude": ["node_modules", "next-env.d.ts"],
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["src/**/*"]
 }
