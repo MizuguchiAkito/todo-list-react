@@ -20,6 +20,26 @@ import TextField from "@mui/material/TextField";
 // import SendIcon from '@mui/icons-material/Send';
 // import Stack from '@mui/material/Stack';
 
+//firebase
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+const firebaseConfig = {
+  apiKey: "AIzaSyCIdQ_G9UsAShltuulzKXakMS5s9rP877M",
+  authDomain: "todotaskapplication.firebaseapp.com",
+  projectId: "todotaskapplication",
+  storageBucket: "todotaskapplication.appspot.com",
+  messagingSenderId: "570596850925",
+  appId: "1:570596850925:web:5eb09c90bc7bdbc6d0a0e4",
+  measurementId: "G-HCZ24QW4LL",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+//ここまでfirebase
+
+console.log(analytics);
+
 const App = () => {
   const [todos, setTodos] = useState<ITodoItem[]>([]);
 
@@ -90,7 +110,7 @@ const App = () => {
       </Grid>
       {/* <ApiFetch /> */}
       <div>
-        <Box sx={{ letterSpacing: 100 }}>
+        <Box sx={{ letterSpacing: 2 }}>
           tasks : {todos.filter((todo) => !todo.completed).length}
         </Box>
         {/* tasks : {todos.filter((todo) => !todo.completed).length} */}
