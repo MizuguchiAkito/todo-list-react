@@ -23,6 +23,8 @@ import TextField from "@mui/material/TextField";
 //firebase
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+// import { height } from "@mui/system";
+// import { width } from "@mui/system";
 const firebaseConfig = {
   apiKey: "AIzaSyCIdQ_G9UsAShltuulzKXakMS5s9rP877M",
   authDomain: "todotaskapplication.firebaseapp.com",
@@ -116,28 +118,51 @@ const App = () => {
         {/* tasks : {todos.filter((todo) => !todo.completed).length} */}
       </div>
       {/* completedがTrueの時だけカウント */}
+      <Grid container>
+        <Grid item xs={9}>
+            <TextField
+              fullWidth
+              label="Task"
+              id="fullWidth"
+              variant="filled"
+              name=""
+              inputRef={todoNameRef}
+            />
+        </Grid>
+        {/* TextFieldはinputRefじゃないと動かない */}
+        {/* <input type="text" name="" id="" ref={todoNameRef} /> */}
 
-      <TextField
-        id=""
-        label="Filled"
-        variant="filled"
-        name=""
-        inputRef={todoNameRef}
-      />
-      {/* TextFieldはinputRefじゃないと動かない */}
-      {/* <input type="text" name="" id="" ref={todoNameRef} /> */}
-
-      <IconButton color="primary" aria-label="addIcon" onClick={handleAddTodo}>
-        <AddIcon color="primary" aria-label="addIcon"></AddIcon>
-      </IconButton>
-
-      <IconButton color="primary" aria-label="deleteIcon" onClick={handleClear}>
-        <DeleteIcon color="primary" aria-label="deleteIcon"></DeleteIcon>
-      </IconButton>
-
-      <IconButton color="primary" aria-label="EditIcon" onClick={handleEdit}>
-        <EditIcon color="primary" aria-label="EditIcon"></EditIcon>
-      </IconButton>
+        <Grid item xs={1}>
+            <IconButton
+              size="large"
+              color="primary"
+              aria-label="addIcon"
+              onClick={handleAddTodo}
+            >
+              <AddIcon color="primary" aria-label="addIcon" sx={{ fontSize: "40px" }}></AddIcon>
+            </IconButton>
+        </Grid>
+        <Grid item xs={1}>
+            <IconButton
+            size="large"
+              color="primary"
+              aria-label="deleteIcon"
+              onClick={handleClear}
+            >
+              <DeleteIcon color="primary" aria-label="deleteIcon" sx={{ fontSize: "40px" }}></DeleteIcon>
+            </IconButton>
+        </Grid>
+        <Grid item xs={1}>
+            <IconButton
+              size="large"
+              color="primary"
+              aria-label="EditIcon"
+              onClick={handleEdit}
+            >
+              <EditIcon color="primary" aria-label="EditIcon" sx={{ fontSize: "40px" }}></EditIcon>
+            </IconButton>
+        </Grid>
+      </Grid>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
     </>
   );
