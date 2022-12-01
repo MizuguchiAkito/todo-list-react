@@ -1,24 +1,52 @@
 import "./App.css";
 import TodoList from "./TodoList";
-import Header from "./Header";
 import { v4 as uuidv4 } from "uuid";
 // uuid...ランダムなid自動生成
 
 import { useState, useRef } from "react";
 import { ITodoItem } from "../../models/todo";
-// import ApiFetch from "src/app/components/ApiFetch";
 
 //material ui
-import { Box, Grid } from "@material-ui/core";
-import IconButton from "@mui/material/IconButton";
+import {
+  Box,
+  Grid,
+  BottomNavigation,
+  BottomNavigationAction,
+  Container,
+  Paper,
+  AppBar,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import TextField from "@mui/material/TextField";
-// import CheckBoxIcon from '@mui/icons-material/CheckBox';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import SendIcon from '@mui/icons-material/Send';
-// import Stack from '@mui/material/Stack';
+import ListIcon from "@mui/icons-material/List";
+
+const classes = {
+  formWrapper: {
+    flexDirection: "row-reverse",
+    textAlign: "center",
+  },
+  formContents: {
+    width: "100%",
+  },
+  footerButtonWrapper: {
+    justifyContent: "space-evenly",
+  },
+  pageFooterWrapper: {
+    color: "white",
+    position: "absolute",
+    bottom: 0,
+    textAlign: "center",
+    width: "100%",
+    backgroundColor: "primary",
+  },
+  typographyStyles: {
+    flex: 1,
+  },
+};
 
 const App = () => {
   const [todos, setTodos] = useState<ITodoItem[]>([]);
@@ -34,11 +62,10 @@ const App = () => {
   const todoNameRef = useRef<HTMLInputElement>(null);
   // 要素の参照処理
 
-  console.log(todoNameRef);
-
   const handleAddTodo = (_: React.MouseEvent) => {
     // タスクの追加処理
     const name = todoNameRef?.current?.value;
+    console.log(name);
     if (!name) return;
     // タスクが空欄の時、タスクを追加しない処理
     setTodos((prevTodos) => {
@@ -65,10 +92,8 @@ const App = () => {
     // filterで検索した値を全て格納
     if (todo.length > 1) {
       // todoの値が1より大きい場合変更不可
-      // console.log("通ってる？")
       return;
     } else {
-      // console.log("成功なり");
       const todo = newTodos.find(
         (todo) => todo.completed === true
       ) as ITodoItem;
@@ -78,47 +103,75 @@ const App = () => {
   };
 
   return (
-    // <Grid container direction="column">
-    // <Grid item>
-    //   <Header />
-    // </Grid>
     <>
       <Grid container direction="column">
         <Grid item>
-          <Header />
+          <AppBar position="static">
+            <Toolbar>
+              <Typography sx={classes.typographyStyles}>
+                ToDo Task Application
+              </Typography>
+              <ListIcon />
+              <Box>{todos.filter((todo) => !todo.completed).length}</Box>
+            </Toolbar>
+          </AppBar>
         </Grid>
       </Grid>
-      {/* <ApiFetch /> */}
-      <div>
-        <Box sx={{ letterSpacing: 100 }}>
-          tasks : {todos.filter((todo) => !todo.completed).length}
-        </Box>
-        {/* tasks : {todos.filter((todo) => !todo.completed).length} */}
-      </div>
-      {/* completedがTrueの時だけカウント */}
 
-      <TextField
-        id=""
-        label="Filled"
-        variant="filled"
-        name=""
-        inputRef={todoNameRef}
-      />
-      {/* TextFieldはinputRefじゃないと動かない */}
-      {/* <input type="text" name="" id="" ref={todoNameRef} /> */}
+      <Container maxWidth="md" sx={classes.formWrapper}>
+        <Paper sx={{ padding: 3 }}>
+          <Box sx={classes.formContents}>
+            <TextField
+              id=""
+              label="Title"
+              variant="filled"
+              name=""
+              inputRef={todoNameRef}
+            />
+            <br />
+            <TextField
+              id=""
+              label="Content"
+              variant="filled"
+              name=""
+              inputRef={todoNameRef}
+            />
+            <br />
+            <TextField
+              id=""
+              size="medium"
+              variant="filled"
+              type="date"
+              name=""
+              inputRef={todoNameRef}
+            />
+          </Box>
+        </Paper>
+      </Container>
 
-      <IconButton color="primary" aria-label="addIcon" onClick={handleAddTodo}>
-        <AddIcon color="primary" aria-label="addIcon"></AddIcon>
-      </IconButton>
-
-      <IconButton color="primary" aria-label="deleteIcon" onClick={handleClear}>
-        <DeleteIcon color="primary" aria-label="deleteIcon"></DeleteIcon>
-      </IconButton>
-
-      <IconButton color="primary" aria-label="EditIcon" onClick={handleEdit}>
-        <EditIcon color="primary" aria-label="EditIcon"></EditIcon>
-      </IconButton>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <Box sx={classes.pageFooterWrapper}>
+        <BottomNavigation showLabels>
+          <BottomNavigationAction
+            label="Add"
+            color="primary"
+            icon={<AddIcon />}
+            onClick={handleAddTodo}
+          />
+          <BottomNavigationAction
+            label="Clear"
+            color="primary"
+            icon={<DeleteIcon />}
+            onClick={handleClear}
+          />
+          <BottomNavigationAction
+            label="Edit"
+            color="primary"
+            icon={<EditIcon />}
+            onClick={handleEdit}
+          />
+        </BottomNavigation>
+      </Box>
     </>
   );
 };
